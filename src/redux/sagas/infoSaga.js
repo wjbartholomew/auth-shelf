@@ -26,9 +26,20 @@ function* getItemFromServer(){
     }
 }
 
+function* deleteItemFromServer(action){
+    try{
+        yield axios.delete('/api/shelf', action);
+
+        yield put({ type: 'GET_SHELF_ITEMS'});
+    }catch(error){
+        console.log('Shelf Delete request failed, error:', error);
+    }
+}
+
 function* infoSaga(){
     yield takeLatest('ADD_TO_SHELF',postToShelf);
     yield takeLatest('GET_SHELF_ITEMS', getItemFromServer);
+    yield takeLatest('DELETE_ITEM', deleteItemFromServer);
 }
 
 
