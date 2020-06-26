@@ -3,6 +3,7 @@
 const cookieSession = require('cookie-session');
 const warnings = require('../constants/warnings');
 
+
 /*
   The cookie session makes it so a user can enters their username and password one time,
   and then we can keep them logged in. We do this by giving them a really long random string
