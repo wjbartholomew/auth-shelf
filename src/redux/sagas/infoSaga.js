@@ -7,8 +7,8 @@ function* postToShelf(action){
     try{
         //create POST request to server
         yield axios.post('/api/shelf', action.payload);
-
         //write dispatch to the reducer?
+        yield put({ type: 'GET_SHELF_ITEMS' });
     }
     catch(error){
         console.log('Error with shelf post:', error);
