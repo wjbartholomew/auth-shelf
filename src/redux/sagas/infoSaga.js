@@ -26,9 +26,9 @@ function* getItemFromServer(){
     }
 }
 
-function* deleteItemFromServer(action){
+function* deleteItemFromServer(){
     try{
-        yield axios.delete('/api/shelf', action);
+        yield axios.delete('/api/shelf/${action.payload}');
 
         yield put({ type: 'GET_SHELF_ITEMS'});
     }catch(error){
