@@ -70,9 +70,9 @@ class InfoPage extends Component {
       <div>
         <p>Currently logged in as <b>{this.props.user.username}</b></p>
 
-        <input onChange={(event) => this.updateUrl(event)} type="text" placeholder="Image URL"></input>
-        <input onChange={(event) => this.updateDescription(event)} type="text" placeholder="Description"></input>
-        <button onClick={this.addToShelf} >Add Item</button>
+        <input value={this.state.image_url} onChange={(event) => this.updateUrl(event)} type="text" placeholder="Image URL"></input>
+        <input value={this.state.description} onChange={(event) => this.updateDescription(event)} type="text" placeholder="Description"></input>
+        <button  onClick={this.addToShelf} >Add Item</button>
        
         <ul>
           {this.props.info.map(item => (
