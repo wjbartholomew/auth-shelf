@@ -15,8 +15,20 @@ function* postToShelf(action){
     }
 }
 
+function* getItemFromServer(){
+
+    try{
+    const shelfItemsFromServerResponse = yield axios.get('/api/shelf');
+
+    yield put({ type: 'SET_SHELF_ITEMS', payload: shelfItemsFromServerResponse.data});
+    }catch(error){
+        console.log('Shelf Get request failerd: error:', error);
+    }
+}
+
 function* infoSaga(){
     yield takeLatest('ADD_TO_SHELF',postToShelf);
+    yield takeLatest('GET_SHELF_ITEMS', getItemFromServer);
 }
 
 
