@@ -19,7 +19,7 @@ function* getItemFromServer(){
 
     try{
     const shelfItemsFromServerResponse = yield axios.get('/api/shelf');
-
+        console.log(shelfItemsFromServerResponse.data)
     yield put({ type: 'SET_SHELF_ITEMS', payload: shelfItemsFromServerResponse.data});
     }catch(error){
         console.log('Shelf Get request failerd: error:', error);

@@ -70,7 +70,7 @@ class InfoPage extends Component {
         <input onChange={(event) => this.updateDescription(event)} type="text" placeholder="Description"></input>
         <button onClick={this.addToShelf} >Add Item</button>
         <ul>
-          {this.props.items.map(item => (
+          {this.props.info.map(item => (
             <li key={item.id}>
               Item on shelf: <img src={item.image_url} alt={item.description}/> | Description: {item.description}
               <button onChange={this.deleteItem}>Delete Item</button>
@@ -84,6 +84,7 @@ class InfoPage extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
+  info: state.info,
 });
 
 export default connect(mapStateToProps)(InfoPage);
