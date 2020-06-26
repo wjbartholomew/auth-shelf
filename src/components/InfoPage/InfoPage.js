@@ -6,7 +6,7 @@ class InfoPage extends Component {
   
   componentDidMount() {
     // used to populate our shelf info page on load of the component
-    this.getShelfItems()
+    this.getShelfItems();
   }
 
 
@@ -26,8 +26,8 @@ class InfoPage extends Component {
   // sends a dispatch with information about an item to be added to the database
   // updates reducer with getShelfItems afterwards
   addToShelf = () => {
-    console.log('In add to shelf')
-    console.log('state/payload is:', this.state)
+    console.log('In add to shelf');
+    console.log('state/payload is:', this.state);
     this.props.dispatch({ type: 'ADD_TO_SHELF', payload: this.state });
     this.setState({
       image_url: '',
@@ -43,7 +43,7 @@ class InfoPage extends Component {
     this.setState({
       ...this.state,
       image_url: event.target.value
-    })
+    });
   }
 
 
@@ -53,11 +53,15 @@ class InfoPage extends Component {
     this.setState({
       ...this.state,
       description: event.target.value
-    })
+    });
   }
 
-  deleteItem = () => {
-    console.log('in deleteItem')
+  //allows a user to delete a specific item based on its ID
+  deleteItem = (event) => {
+    console.log('in deleteItem');
+    console.log('payload:', event.target.value);
+    this.props.dispatch({ type: 'DELETE_ITEM', payload: event.target.value });
+    this.getShelfItems();
   }
 
 
@@ -69,12 +73,13 @@ class InfoPage extends Component {
         <input onChange={(event) => this.updateUrl(event)} type="text" placeholder="Image URL"></input>
         <input onChange={(event) => this.updateDescription(event)} type="text" placeholder="Description"></input>
         <button onClick={this.addToShelf} >Add Item</button>
+       
         <ul>
           {this.props.info.map(item => (
             <li key={item.id}>
               Item on shelf: <img src={item.image_url} alt={item.description}/> | Description: {item.description}
-              <br />
-              <button onChange={this.deleteItem}>Delete Item</button>
+               <br />
+              <button onClick={(event)=>this.deleteItem(event)} value={item.id}>Delete Item</button>
             </li>
           ))}
         </ul>
