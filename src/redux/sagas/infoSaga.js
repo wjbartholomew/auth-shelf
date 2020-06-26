@@ -6,7 +6,7 @@ function* postToShelf(action){
     
     try{
         //create POST request to server
-        yield axios.post('/api/shelf', action.payload, config);
+        yield axios.post('/api/shelf', action.payload);
 
         //write dispatch to the reducer?
     }
