@@ -21,8 +21,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
-
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log( 'Adding to databse', req.body.url,req.body.description  )
+    let query = `INSERT INTO "item" ( "image_url", "description", "user_id" )
+                        VALUES ($1, $2, $3);`;
+    pool.query(query, [ req.body.url, req.body.description, req.user.id ])
+    .then(result => {
+        res.sendStatus( 200 );
+    })
+    .catch(error => {
+        console.log('error posting to item', error);
+        res.sendStatus(500);
+    });
 });
 
 
