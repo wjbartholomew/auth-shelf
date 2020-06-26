@@ -73,6 +73,7 @@ class InfoPage extends Component {
           {this.props.info.map(item => (
             <li key={item.id}>
               Item on shelf: <img src={item.image_url} alt={item.description}/> | Description: {item.description}
+              <br />
               <button onChange={this.deleteItem}>Delete Item</button>
             </li>
           ))}
