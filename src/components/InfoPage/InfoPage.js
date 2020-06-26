@@ -56,8 +56,10 @@ class InfoPage extends Component {
     })
   }
 
-  deleteItem = () => {
+  deleteItem = (event) => {
     console.log('in deleteItem')
+    console.log('payload:', event.target.value)
+    this.props.dispatch({ type: 'DELETE_ITEM', payload: event.target.value });
   }
 
 
@@ -73,7 +75,7 @@ class InfoPage extends Component {
           {this.props.info.map(item => (
             <li key={item.id}>
               Item on shelf: <img src={item.image_url} alt={item.description}/> | Description: {item.description}
-              <button onChange={this.deleteItem}>Delete Item</button>
+              <button onClick={(event)=>this.deleteItem(event)} value={item.id}>Delete Item</button>
             </li>
           ))}
         </ul>
